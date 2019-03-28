@@ -63,7 +63,7 @@ describe('<HomePage />', () => {
 			it('`<input>` element should be of type `text`', () => {
 			  expect(
 				wrapper.find('form').childAt(0).props().type
-			  ).toBe('text');
+			  ).toBe('email');
 			});
 
 			it('`<input>` element should have a placeholder attribute with value `Login`', () => {
@@ -72,11 +72,20 @@ describe('<HomePage />', () => {
 				).toBe('Login');
 			});
 
-			// it('`<input>` element value should be empty', () => {
-			// 	expect(
-			// 	  wrapper.find('form').childAt(0).props().value
-			// 	).toBe('');
-			// });
+			it('`<input>` element should be required', () => {
+				expect(
+				  wrapper.find('form').childAt(0).props().required
+				).toBe(true);
+			});
+
+			it('should display an error when no value is input', () => {
+				const handleFormSubmit = spy();
+				wrapper = mount(<HomePage handleSubmit={handleFormSubmit} />);
+				wrapper.find('form').simulate('submit');
+				expect(
+				  wrapper.state().fieldErrors.name
+				).toBe('Please type in your email.');
+			});
 
 				//Password input
 			it('`<input>` element should be of type `password`', () => {
@@ -91,11 +100,11 @@ describe('<HomePage />', () => {
 				).toBe('Password');
 			});
 
-			// it('`<input>` element value should be empty', () => {
-			// 	expect(
-			// 	  wrapper.find('form').childAt(2).props().value
-			// 	).toBe('');
-			// });
+			it('`<input>` element should be required', () => {
+				expect(
+				  wrapper.find('form').childAt(0).props().required
+				).toBe(true);
+			});
 
 				//Submit Input
 			
