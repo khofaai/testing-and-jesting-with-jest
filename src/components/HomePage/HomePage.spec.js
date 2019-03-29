@@ -58,6 +58,15 @@ describe('<HomePage />', () => {
 		});
 	
 		describe('<input />', () => {
+			
+			it('should display an error when no value is input', () => {
+				const handleFormSubmit = spy();
+				wrapper = mount(<HomePage handleSubmit={handleFormSubmit} />);
+				wrapper.find('form').simulate('submit');
+				expect(
+				  wrapper.state().fieldErrors.name
+				).toBe('Please fill in the fields.');
+			});
 
 				//Login input
 			it('`<input>` element should be of type `text`', () => {
@@ -76,15 +85,6 @@ describe('<HomePage />', () => {
 				expect(
 				  wrapper.find('form').childAt(0).props().required
 				).toBe(true);
-			});
-
-			it('should display an error when no value is input', () => {
-				const handleFormSubmit = spy();
-				wrapper = mount(<HomePage handleSubmit={handleFormSubmit} />);
-				wrapper.find('form').simulate('submit');
-				expect(
-				  wrapper.state().fieldErrors.name
-				).toBe('Please type in your email.');
 			});
 
 				//Password input

@@ -39,7 +39,7 @@ class HomePage extends Component {
 	validate(formData) {   
 		const errors = {};
 		if (!formData.name || formData.name === '' || formData.name === null) {
-		  errors.name = 'Please type in your email.';
+		  errors.name = 'Please fill in the fields.';
 		}
 		return errors;
 	}
