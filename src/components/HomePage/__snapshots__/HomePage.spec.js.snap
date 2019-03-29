@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HomePage /> should render initial layout 1`] = `
+Array [
+  <form
+    name="form"
+    onSubmit={[Function]}
+  >
+    <input
+      name="login"
+      onChange={[Function]}
+      placeholder="Login"
+      type="email"
+    />
+    <br />
+    <input
+      name="password"
+      onChange={[Function]}
+      placeholder="Password"
+      type="password"
+    />
+    <br />
+    <button
+      type="submit"
+    >
+      Click me
+    </button>
+    <p
+      className="error"
+    />
+  </form>,
+]
+`;

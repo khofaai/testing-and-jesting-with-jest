@@ -18,13 +18,13 @@ class HomePage extends Component {
 		e.preventDefault();
 		console.log("Why you clicked me .. ? ");
 
-		const err = this.validate(this.state.fields);
-
 		this.setState({
-			fieldErrors: err
+			fieldErrors: this.validate(this.state.fields)
 		});
 
-		if (Object.keys(err).length) return;
+		if ( !this.state.fieldErrors ) {
+			console.log("Authentified.");
+		} 
 	}
 
 	onInputChange (e) {
@@ -39,6 +39,7 @@ class HomePage extends Component {
 	validate(formData) {   
 		const errors = {};
 		if (!formData.name || formData.name === '' || formData.name === null) {
+			console.log(formData.name);
 		  errors.name = 'Please fill in the fields.';
 		}
 		return errors;
@@ -50,10 +51,10 @@ class HomePage extends Component {
 				{/* <img src={logo} className="App-logo" alt="logo"/> */}
 				<input 
 					type="email" 
-					name="Login" 
+					name="login" 
 					placeholder="Login" 
-					required
-					value={this.state.fields.name || ''}
+					// required
+					// value={this.state.fields.name || ''}
 					onChange={ (e) => this.onInputChange(e)}
 				/>
 				<br/>
@@ -62,10 +63,13 @@ class HomePage extends Component {
 					name="password" 
 					placeholder="Password" 
 					onChange={ (e) => this.onInputChange(e)}
-					required
+					// required
 				/>
 				<br/>
 				<button type="submit">Click me</button>
+				<p className="error">
+				{this.state.fieldErrors.name}
+				</p>
 			</form>
 		);
 	}

@@ -20,6 +20,13 @@ describe('<HomePage />', () => {
 	  wrapper = shallow(<HomePage {...props} />);
 	});
 
+	it("should render initial layout", () => {
+    // when
+    const component = shallow(<HomePage />);
+    // then
+    expect(component.getElements()).toMatchSnapshot();
+	});
+
 	it('should have a `<form>` element', () => {
 		expect(
 		  wrapper.find('form').length
@@ -81,12 +88,6 @@ describe('<HomePage />', () => {
 				).toBe('Login');
 			});
 
-			it('`<input>` element should be required', () => {
-				expect(
-				  wrapper.find('form').childAt(0).props().required
-				).toBe(true);
-			});
-
 				//Password input
 			it('`<input>` element should be of type `password`', () => {
 				expect(
@@ -99,14 +100,6 @@ describe('<HomePage />', () => {
 				  wrapper.find('form').childAt(2).props().placeholder
 				).toBe('Password');
 			});
-
-			it('`<input>` element should be required', () => {
-				expect(
-				  wrapper.find('form').childAt(0).props().required
-				).toBe(true);
-			});
-
-				//Submit Input
 			
 		});
 	});
