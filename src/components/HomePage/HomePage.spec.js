@@ -20,6 +20,13 @@ describe('<HomePage />', () => {
 	  wrapper = shallow(<HomePage {...props} />);
 	});
 
+	it("should render initial layout", () => {
+    // when
+    const component = shallow(<HomePage />);
+    // then
+    expect(component.getElements()).toMatchSnapshot();
+	});
+
 	it('should have a `<form>` element', () => {
 		expect(
 		  wrapper.find('form').length
@@ -58,12 +65,21 @@ describe('<HomePage />', () => {
 		});
 	
 		describe('<input />', () => {
+			
+			it('should display an error when no value is input', () => {
+				const handleFormSubmit = spy();
+				wrapper = mount(<HomePage handleSubmit={handleFormSubmit} />);
+				wrapper.find('form').simulate('submit');
+				expect(
+				  wrapper.state().fieldErrors.name
+				).toBe('Please fill in the fields.');
+			});
 
 				//Login input
 			it('`<input>` element should be of type `text`', () => {
 			  expect(
 				wrapper.find('form').childAt(0).props().type
-			  ).toBe('text');
+			  ).toBe('email');
 			});
 
 			it('`<input>` element should have a placeholder attribute with value `Login`', () => {
@@ -71,12 +87,6 @@ describe('<HomePage />', () => {
 				  wrapper.find('form').childAt(0).props().placeholder
 				).toBe('Login');
 			});
-
-			// it('`<input>` element value should be empty', () => {
-			// 	expect(
-			// 	  wrapper.find('form').childAt(0).props().value
-			// 	).toBe('');
-			// });
 
 				//Password input
 			it('`<input>` element should be of type `password`', () => {
@@ -90,14 +100,6 @@ describe('<HomePage />', () => {
 				  wrapper.find('form').childAt(2).props().placeholder
 				).toBe('Password');
 			});
-
-			// it('`<input>` element value should be empty', () => {
-			// 	expect(
-			// 	  wrapper.find('form').childAt(2).props().value
-			// 	).toBe('');
-			// });
-
-				//Submit Input
 			
 		});
 	});
